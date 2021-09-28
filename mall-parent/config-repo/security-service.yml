@@ -1,0 +1,22 @@
+server:
+  port: 9002
+mybatis-plus:
+  mapper-locations: classpath*:mybatis/*/*.xml
+  type-aliases-package: com.murphy.mall.*.po
+  configuration:
+    # 下划线驼峰转换
+    map-underscore-to-camel-case: true
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
+logging:
+  #file: demo.log
+  pattern:
+    console: "%d - %msg%n"
+  level:
+    org.springframework.web: debug
+    com.murphy: debug
+security:
+  oauth2:
+    resource:
+      jwt:
+        key-uri: http://localhost:9098/oauth/token_key	# 如果使用JWT，可以获取公钥用于 token 的验签

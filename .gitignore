@@ -1,0 +1,20 @@
+# Project exclude paths
+/mall-parent/auth-center/target/
+/mall-parent/mall-admin/mall-admin-instance/target/
+/mall-parent/mall-admin/mall-admin-service/target/
+/mall-parent/mall-canal/target/
+/mall-parent/mall-common/target/
+/mall-parent/mall-config/target/
+/mall-parent/mall-core/target/
+/mall-parent/mall-gateway/target/
+/mall-parent/mall-item/mall-item-instance/target/
+/mall-parent/mall-item/mall-item-service/target/
+/mall-parent/mall-page/target/
+/mall-parent/mall-registry/target/
+/mall-parent/mall-search/mall-search-instance/target/
+/mall-parent/mall-search/mall-search-service/target/
+/mall-parent/mall-security/mall-security-instance/target/
+/mall-parent/mall-security/mall-security-service/target/
+/mall-parent/mall-upload/target/
+/mall-portal-ui/dist/
+/mall-portal-ui/node_modules/

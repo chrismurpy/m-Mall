@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.murphy.mall.security.dao.RoleDao">
+
+	<sql id="roleColumns">
+		a.id_ AS "id",
+		a.name_ AS "name",
+		a.desc_ AS "desc",
+		a.title_ AS "title"
+	</sql>
+
+	<select id="selectByPage" resultType="Role">
+		select
+			<include refid="roleColumns"/>
+		from
+			role_ a
+		<where>
+		<if test="title != null and title != ''">
+			a.title_ like '%${title}%'
+		</if>
+		<if test="name != null and name != ''">
+			and a.name_ like '%${name}%'
+		</if>
+		</where>
+	</select>
+
+	<delete id="deleteUserByRole">
+		delete from
+			role_user_
+		where
+			role_id_ = #{id}
+	</delete>
+
+	<insert id="insertUserAndRole">
+		insert into role_user_(
+			user_id_,
+			role_id_
+		) values(
+			#{userId},
+			#{roleId}
+		)
+	</insert>
+
+	<delete id="deleteMenuByRole">
+		delete from
+			role_menu_
+		where
+			role_id_ = #{id}
+	</delete>
+
+	<insert id="insertMenuAndRole">
+		insert into role_menu_(
+			menu_id_,
+			role_id_
+		) values(
+			#{menuId},
+			#{roleId}
+		)
+	</insert>
+
+	<select id="selectUserByRole" resultType="User">
+		SELECT
+		    a.id_ as "id",
+		  	a.birthday_ as "birthday",
+		  	a.desc_ as "desc",
+		  	a.email_ as "email",
+		  	a.lock_ as "lock",
+		  	a.password_ as "password",
+		  	a.principal_ as "principal",
+		  	a.real_name_ as "realName",
+		  	a.salt as "salt",
+		  	a.sex_ as "sex",
+		  	a.tel_ as "tel",
+			a.user_name_ as "userName",
+		  	a.dept_id_ as "deptId",
+		  	a.post_id_ as "postId"
+		FROM
+			user_ a
+			LEFT JOIN role_user_ b ON b.user_id_ = a.id_
+			LEFT JOIN role_ c ON c.id_ = b.role_id_
+		WHERE
+			c.id_ = #{id}
+	</select>
+
+</mapper>

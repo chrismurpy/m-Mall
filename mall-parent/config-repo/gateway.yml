@@ -1,0 +1,50 @@
+server:
+  port: 8062
+ribbon:
+  ConnectTimeout: 250 # 连接超时时间 ms
+  ReadTimeout: 2000 # 通信超时时间
+  OkToRetryOnAllOperations: true # 是否对所有操作重试
+  MaxAutoRetriesNextServer: 2 # 同一服务不同实例的重试次数
+  MaxAutoRetries: 1 # 同一实例的重试次数
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMillisecond: 60000 # 熔断超时时长：6000 ms
+spring:
+  redis:
+    host: 192.168.2.180
+    port: 6379
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allow-credentials: true # 允许携带令牌
+            allowed-origins: "*" # 允许任何域名
+            allowed-headers: "*" # 允许任何参数
+            allowed-methods: "*" # 允许任何请求方法
+            max-age: 3600 # 超时时间
+      routes:
+        - id: security-service
+          uri: lb://security-service
+          predicates:
+            - Path=/api/security/**
+        - id: item-service
+          uri: lb://item-service
+          predicates:
+            - Path=/api/item/**
+        - id: admin-service
+          uri: lb://admin-service
+          predicates:
+            - Path=/api/admin/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                key-resolver: "#{@ipKeyResolver}"
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 4
+      default-filters:
+        - StripPrefix=2

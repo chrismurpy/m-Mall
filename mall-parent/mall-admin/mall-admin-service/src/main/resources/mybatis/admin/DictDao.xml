@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.murphy.mall.admin.dao.DictDao">
+
+	<select id="selectByPage" resultType="Dict">
+		select
+			*
+		from
+			dict_
+		<where>
+		<if test="type != null and type != ''">
+			type_ = #{type}
+		</if>
+		<if test="label != null and label != ''">
+			and label_ like '%${label}%'
+		</if>
+		</where>
+	</select>
+
+</mapper>

@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: page-service
+# 生成静态页的位置
+pagepath: /Users/murphy/Desktop/后端开发/每日学习/第十五章 14-分布式高并发实战项目/电商项目/m-Mall/mall-parent/mall-page/src/main/resources/templates/items

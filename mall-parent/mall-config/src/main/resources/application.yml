@@ -1,0 +1,31 @@
+server:
+  port: 8888
+
+eureka:
+  client:
+    registry-fetch-interval-seconds: 5 #Server服务的列表只读备份，然后缓存在本地，默认30S
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+    lease-expiration-duration-in-seconds: 10 # 10S即过期
+    lease-renewal-interval-in-seconds: 5 # 5S记录一次心跳
+
+spring:
+  profiles:
+    active: composite,default # 如果要使用本地配置文件，此处需添加composite，多profile时，谁在前面谁的配置优先级就高
+  cloud:
+    config:
+      server:
+        bootstrap: true # 提前加载配置文件，保证后续数据库连接正常启动
+        default-profile: default
+        default-label: master
+        composite: # 此配置为使用本地文件，与Git脱离关系
+          - type: native
+            search-locations: file:/Users/murphy/Desktop/后端开发/每日学习/第十五章 14-分布式高并发实战项目/电商项目/m-Mall/mall-parent/config-repo
+        git: # git配置 - 此处未配置
+          uri:
+          username:
+          password:
+          search-paths: config-repo

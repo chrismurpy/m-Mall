@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.murphy.mall.item.dao.BrandDao">
+    <select id="selectByPage" resultType="Brand">
+        select
+        * from
+        brand_
+        <where>
+            <if test="name != null and name != ''">
+                and name_ like '%${name}%'
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteCategoryByBrand">
+        delete from
+            category_brand_
+        where
+            brand_id_ = #{id}
+    </delete>
+
+    <insert id="insertCategoryAndBrand">
+        insert into category_brand_(
+            category_id_,
+            brand_id_
+        ) values (
+            #{categoryId},
+            #{brandId}
+        )
+    </insert>
+    
+    <select id="selectCategoryByBrand" resultType="Category">
+        select
+            a.id_ AS "id",
+            a.title_ AS "title",
+            a.order_ AS "order",
+            a.parent_id_ AS "parentId"
+        from
+            category_ a
+            LEFT JOIN category_brand_ b ON b.category_id_ = a.id_
+            LEFT JOIN brand_ c ON c.id_ = b.brand_id_
+        WHERE
+            c.id_ = #{id}
+    </select>
+</mapper>

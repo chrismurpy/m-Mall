@@ -1,0 +1,9 @@
+server:
+  port: 9008
+
+logging:
+  pattern:
+    console: "%d - %msg%n"
+  level:
+    org.springframework.web: debug
+    com.murphy: debug

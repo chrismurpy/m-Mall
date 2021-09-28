@@ -1,0 +1,6 @@
+server:
+  port: 9098
+
+logging:
+  level:
+    org.springframework.security: DEBUG

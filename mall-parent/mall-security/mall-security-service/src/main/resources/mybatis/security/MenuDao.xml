@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.murphy.mall.security.dao.MenuDao">
+
+    <sql id="menuColumns">
+        DISTINCT
+		a.id_ AS `id`,
+		a.title_ AS `title`,
+		a.order_ AS `order`,
+		a.parent_id_ AS `parentId`,
+		a.expand_ AS `expand`,
+        a.path_ as `path`,
+        a.name_ as `name`,
+        a.component_ as `component`,
+        a.hide_in_menu_ as `hideInMenu`,
+        a.not_cache_ as `notCache`,
+        a.icon_ as `icon`
+	</sql>
+
+    <sql id="menuJoins">
+        LEFT JOIN role_menu_ b ON b.menu_id_ = a.id_
+        LEFT JOIN role_ c ON c.id_ = b.role_id_
+        LEFT JOIN role_user_ d ON  d.role_id_ = c.id_
+        LEFT JOIN user_ e ON e.id_ = d.user_id_
+    </sql>
+
+    <select id="selectByRoleId" resultType="Menu">
+        select
+            <include refid="menuColumns"/>
+        from
+            menu_ a
+            <include refid="menuJoins"></include>
+        where
+            c.id_ = #{roleId}
+    </select>
+
+    <select id="selectByUserId" resultType="menu">
+        select
+          <include refid="menuColumns"/>
+        from
+          menu_ a
+          <include refid="menuJoins"></include>
+        <where>
+            <if test="userId != null">
+                and e.id_ = #{userId}
+            </if>
+        </where>
+        order by a.order_
+    </select>
+
+    <delete id="deleteMenuByRole">
+        delete from
+          role_menu_
+        where
+          role_id_ = #{id}
+    </delete>
+
+    <insert id="insertMenuAndRole">
+        insert into role_menu_(
+            menu_id_,
+            role_id_
+        ) values(
+            #{menuId},
+            #{roleId}
+        )
+    </insert>
+
+</mapper>

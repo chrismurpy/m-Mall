@@ -1,0 +1,21 @@
+server:
+  port: 9006
+
+logging:
+  #file: demo.log
+  pattern:
+    console: "%d - %msg%n"
+  level:
+    org.springframework.web: debug
+    com.murphy: debug
+
+spring:
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch
+      cluster-nodes: 192.168.2.180:9300
+  elasticsearch:
+    rest:
+      uris: 192.168.2.180:9200
+  jackson:
+    default-property-inclusion: non_null # 配置JSON处理时忽略空值
