@@ -27,17 +27,12 @@ public class JwtConfig {
         return new JwtTokenStore(jwtAccessTokenConverter);
     }
 
-//    @Bean
-//    public TokenKeyEndpoint tokenKeyEndpoint() {
-//        return new TokenKeyEndpoint(jwtAccessTokenConverter());
-//    }
-
     @Bean
     protected JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         Resource resource =  new ClassPathResource(public_cert);
 
-        String publicKey = null;
+        String publicKey;
         try {
             publicKey = new String(FileCopyUtils.copyToByteArray(resource.getInputStream()));
         }catch (IOException e) {

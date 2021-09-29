@@ -2,12 +2,12 @@ package com.murphy.mall.auth.service.impl;
 
 import com.murphy.mall.auth.client.UserClient;
 import com.murphy.mall.security.po.Role;
-import com.murphy.mall.security.po.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -33,7 +33,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 通过Feign调用用户微服务
-        User user = userClient.getByUserName(username);
+        com.murphy.mall.security.po.User user = userClient.getByUserName(username);
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         if (user != null) {
             LOGGER.debug("Current User = " + user);
@@ -47,6 +47,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
                 }
             }
         }
-        return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), grantedAuthorities);
+        LOGGER.debug("Granted Authorities = " + grantedAuthorities);
+        return new User(user.getUserName(), user.getPassword(), grantedAuthorities);
     }
 }

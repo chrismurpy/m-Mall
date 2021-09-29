@@ -40,7 +40,7 @@ spring:
     url: jdbc:mysql://192.168.2.180:3306/m-Mall?characterEncoding=utf8&characterSetResults=utf8&autoReconnect=true&failOverReadOnly=false
     username: root
     password: xmf123456
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
   hikari:
     idle-timeout: 60000
     maximum-pool-size: 30

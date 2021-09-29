@@ -22,8 +22,8 @@ import java.util.UUID;
  * @author murphy
  * @since 2021/9/25 11:05 下午
  */
-@RequestMapping("/user")
-@RestController
+//@RequestMapping("/user")
+//@RestController
 public class UserController {
 
     @Autowired

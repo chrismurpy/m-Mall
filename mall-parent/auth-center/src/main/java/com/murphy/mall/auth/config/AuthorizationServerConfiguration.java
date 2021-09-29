@@ -1,6 +1,9 @@
 package com.murphy.mall.auth.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -32,8 +35,11 @@ import java.util.concurrent.TimeUnit;
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuthorizationServerConfiguration.class);
+
     @Autowired
     private DataSource dataSource;
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -59,6 +65,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
      * 定义从数据库 oauth_client_details 表中获取客户端信息
      * @return
      */
+    @Bean
     public ClientDetailsService clientDetailsService() {
         return new JdbcClientDetailsService(dataSource);
     }
@@ -86,11 +93,12 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
      * 采用非对称式加密算法 - 私钥颁发令牌，公钥解析令牌
      * @return
      */
+    @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
-        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("kaikeba.jks"),"kaikeba".toCharArray());
+        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("murphy.jks"),"murphy".toCharArray());
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         // 密钥别名
-        converter.setKeyPair(keyStoreKeyFactory.getKeyPair("kaikeba"));
+        converter.setKeyPair(keyStoreKeyFactory.getKeyPair("murphy"));
         return converter;
     }
 
