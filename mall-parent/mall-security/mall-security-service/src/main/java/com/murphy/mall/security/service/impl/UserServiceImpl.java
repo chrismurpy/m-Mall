@@ -17,8 +17,8 @@ import java.util.List;
 @Service
 public class UserServiceImpl extends CrudServiceImpl<User> implements IUserService {
 
-//	@Autowired
-//	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Override
 	public List<Role> selectRoleByUser(Long id) {
@@ -34,7 +34,7 @@ public class UserServiceImpl extends CrudServiceImpl<User> implements IUserServi
 		}
 
 		//TODO 加入oath2后改回来了
-//		entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+		entity.setPassword(passwordEncoder.encode(entity.getPassword()));
 //		passwordHelper.encryptPassword(entity); //加密md5(md5(password,salt))
 
 		boolean result = super.saveOrUpdate(entity);

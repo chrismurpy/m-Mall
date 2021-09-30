@@ -38,12 +38,21 @@ public class TestEndPointController {
         return "book Id：" + id;
     }
 
+    /**
+     * 只有管理员才能访问
+     * @param id
+     * @return
+     */
     @GetMapping("/anno/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String getAnno(@PathVariable String id) {
         return "Admin Id：" + id;
     }
 
+    /**
+     * 可以定义多个角色访问
+     * @return
+     */
     @RequestMapping("/hello")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     public String hello() {

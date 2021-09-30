@@ -2,8 +2,8 @@ import axios from 'axios'
 import { Message } from 'view-design';
 
 const instance = axios.create({
-  // baseURL: 'http://localhost:8062/api',
-  baseURL: 'http://localhost:9005',
+  baseURL: 'http://localhost:8062/api',
+  // baseURL: 'http://localhost:9005',
   // baseURL: '/api',
   timeout: 1000000
 })
