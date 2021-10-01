@@ -12,7 +12,7 @@ import java.util.List;
  * @author murphy
  * @since 2021/9/21 9:12 下午
  */
-@RequestMapping("/item/category")
+@RequestMapping("/category")
 public interface CategoryApi {
 
     @ApiOperation(value = "查询", notes = "根据实体类查询")

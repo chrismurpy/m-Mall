@@ -14,7 +14,7 @@ import java.util.List;
  * @author murphy
  * @since 2021/9/22 3:41 下午
  */
-@RequestMapping("/item/brand")
+@RequestMapping("/brand")
 public interface BrandApi {
 
     @ApiOperation(value = "根据ids查询品牌", notes = "根据ids查询")

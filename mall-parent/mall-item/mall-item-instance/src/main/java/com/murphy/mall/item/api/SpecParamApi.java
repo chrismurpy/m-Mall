@@ -14,7 +14,7 @@ import java.util.List;
  * @author murphy
  * @since 2021/9/22 4:52 下午
  */
-@RequestMapping(value = "/item/param")
+@RequestMapping(value = "/param")
 public interface SpecParamApi {
 
     @ApiOperation(value = "查询规格", notes = "根据实体条件查询参数")

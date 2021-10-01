@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author murphy
  * @since 2021/9/22 4:40 下午
  */
-@RequestMapping("/item/spu-detail")
+@RequestMapping("/spu-detail")
 public interface SpuDetailApi {
 
     /**

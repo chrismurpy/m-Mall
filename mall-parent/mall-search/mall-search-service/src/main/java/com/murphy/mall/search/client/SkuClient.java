@@ -2,6 +2,7 @@ package com.murphy.mall.search.client;
 
 import com.murphy.mall.item.api.SkuApi;
 import com.murphy.mall.item.po.Sku;
+import com.murphy.mall.item.po.Spu;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,12 @@ public interface SkuClient extends SkuApi {
         @Override
         public List<Sku> selectSkusBySpuId(Long spuId) {
             LOGGER.error("发送异常，进入fallback方法！- Sku");
+            return null;
+        }
+
+        @Override
+        public Sku edit(Long id) {
+            LOGGER.info("异常发生，进入fallback方法！- sku");
             return null;
         }
     }

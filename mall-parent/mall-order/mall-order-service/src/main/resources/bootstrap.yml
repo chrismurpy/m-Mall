@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: order-service
+  # 多个接口上的@FeignClient("相同服务名")会报错，overriding is disabled
+  # 设置为true，即允许同名
+  main:
+    allow-bean-definition-overriding: true

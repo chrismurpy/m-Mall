@@ -1,4 +1,4 @@
-package com.murphy.mall.security.config;
+package com.murphy.mall.order.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -28,13 +28,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                // 所有用户微服务未认证可以访问
-//                .antMatchers("/user/**", "/security/user/**").permitAll()
-                // 需要登录认证
-                .antMatchers("/user/login", "/security/user/login").permitAll()
-                // 用于测试
-                .antMatchers("/book/**").hasRole("ADMIN")
-                .antMatchers("/**").authenticated();
+                // 未认证可以访问
+                .antMatchers("/**").permitAll();
     }
 
     @Override

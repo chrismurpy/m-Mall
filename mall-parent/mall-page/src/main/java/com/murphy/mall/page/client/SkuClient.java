@@ -2,6 +2,7 @@ package com.murphy.mall.page.client;
 
 import com.murphy.mall.item.api.SkuApi;
 import com.murphy.mall.item.po.Sku;
+import com.murphy.mall.item.po.Spu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -27,6 +28,12 @@ public interface SkuClient extends SkuApi {
 
         @Override
         public List<Sku> selectSkusBySpuId(Long spuId) {
+            LOGGER.info("异常发生，进入fallback方法！- sku");
+            return null;
+        }
+
+        @Override
+        public Sku edit(Long id) {
             LOGGER.info("异常发生，进入fallback方法！- sku");
             return null;
         }

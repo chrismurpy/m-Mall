@@ -12,6 +12,7 @@ import org.springframework.security.jwt.crypto.sign.RsaVerifier;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.IOException;
 import java.security.KeyPair;
 import java.security.interfaces.RSAPrivateKey;
 import java.util.HashMap;
@@ -51,7 +52,7 @@ public class JwtTest {
     @Test
     public void testVerify() {
         // 令牌
-        String token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlcyI6InIwMSwgcm8yLCBhZG1pbiIsIm5hbWUiOiJtdXJwaHkiLCJpZCI6MTIzfQ.Gc2ntSS5XdV66PlT1sZK99lCBa3rUWTwwBljWUS5FglsZ_bZhy42PoG6v1EUFMm7z9k8apqQJfky2oWIqFUhcESE8V2esOo5qxQBc7B1NdL61TbBS4xMJsJHSYn0lkjuvqA1kudmBf5IkW-tjyK_Ni-sFUYf82wMsATsAoY2xY0jFYjxTSnOunMl3NHZOZkXgG708tw83ZhP_WpzZzV9Inp-SYTLyTniMKQ4hFbG2C3GawUeSlAAfqBQAkRI-5WygVFxN9p-oM2YQCq0BJKTlb-1iiSNPwI6Zon2x1HpkyFRWONsFOz2Z0ceD1LxzAiRIG570OwbXO7ZB3Ae8QLlMQ";
+        String token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzMwODU4ODEsInVzZXJfbmFtZSI6ImFkbWluIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9NQU5BR0VSIiwiUk9MRV9BRE1JTiJdLCJqdGkiOiI5ZDlkOTdjZi00ZDg0LTQwZTQtODEzYi1hMGRiYWE5NGFmN2UiLCJjbGllbnRfaWQiOiJjbGllbnQiLCJzY29wZSI6WyJyZWFkIl19.MobPPQqMzwtNykS7bEwThfJrtZ1I34xhs4Zi0OvMgj-Rwadr-dn3LZU4G2a8tZNsKDtlcRpKeACLAd9GfUSuvxu3qU5jURvZZakMVShLyKBearRo231PTg5G2RMzQ6aFVi6g0R4FcnSppj1EjsoQLADDuhcVtRr04__lKtl5S0aGYDD1WxOyuLSFyeKJpMK4VK5CEVEd0EIdElku_sYncbZrovUjJWDfeXYEJJAS4bsa1k3-TwJ4jiCLXN4tDFQRBVDYB0_lNZV2wmFWml2ymYz_dX1pX7Qi63iGC_ixUq0Rdpf9HTpYGGlLvP04yGT0YMHSG1jseAUFlfhXspx0wA";
         // 公钥
         String publicKey = "-----BEGIN PUBLIC KEY-----\n" +
                 "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmFxQrckCtns0gKihj35D\n" +
@@ -66,5 +67,38 @@ public class JwtTest {
         Jwt jwt = JwtHelper.decodeAndVerify(token, new RsaVerifier(publicKey));
         String claims = jwt.getClaims();
         System.out.println(claims);
+
+        try {
+            Map<String, String> map = new ObjectMapper().readValue(claims, Map.class);
+            System.out.println(map.get("user_name"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 使用私钥颁发令牌
+     */
+    @Test
+    public void testCreateAdminJwt() throws Exception {
+//        String keyLocation = "murphy.jks";
+//        String keyPassword = "murphy";
+//        ClassPathResource resource = new ClassPathResource(keyLocation);
+        // 存储密钥的工厂对象
+        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("murphy.jks"),"murphy".toCharArray());
+        // 密钥对 - 公钥 + 私钥
+        KeyPair keyPair = keyStoreKeyFactory.getKeyPair("murphy","murphy".toCharArray());
+        // 私钥
+        RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
+        // 自定义 载荷信息(PayLoad)
+        Map<String, Object> tokenMap = new HashMap<>();
+        tokenMap.put("user_name", "admin");
+        tokenMap.put("authorities", new String[]{"ROLE_ADMIN"});
+        tokenMap.put("client_id", "client");
+        // 使用工具类 - 通过私钥颁发 Jwt 令牌
+        Jwt jwt = JwtHelper.encode(new ObjectMapper().writeValueAsString(tokenMap), new RsaSigner(privateKey));
+        // 取出私钥
+        String token = jwt.getEncoded();
+        System.out.println(token);
     }
 }

@@ -21,6 +21,7 @@
         <module>mall-security</module>
         <module>mall-admin</module>
         <module>auth-center</module>
+        <module>mall-order</module>
     </modules>
     <packaging>pom</packaging>
 

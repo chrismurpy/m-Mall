@@ -1,9 +1,11 @@
 package com.murphy.mall.item.controller;
 
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.murphy.mall.core.controller.BaseController;
 import com.murphy.mall.item.po.Sku;
 import com.murphy.mall.item.service.ISkuService;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

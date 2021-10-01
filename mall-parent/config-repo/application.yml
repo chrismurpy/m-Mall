@@ -14,6 +14,7 @@ feign:
   hystrix:
     enabled: true #开启熔断
 
+# 线程隔离
 hystrix:
   command:
     default:
@@ -21,6 +22,7 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 60000 #熔断超时时间
+          strategy: SEMAPHORE
 
 ribbon:
   ReadTimeout: 60000 #通信超时时间
