@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.murphy.mall.order.dao.IOrderDao">
+
+    <select id="selectByPage" resultType="Order">
+        select
+        *
+        from
+        order_
+        <where>
+            <if test="username != null and username != ''">
+                username_ = #{username}
+            </if>
+        </where>
+    </select>
+
+</mapper>

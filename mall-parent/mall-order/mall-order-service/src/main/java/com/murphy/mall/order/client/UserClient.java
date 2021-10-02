@@ -1,4 +1,4 @@
-package com.murphy.mall.auth.client;
+package com.murphy.mall.order.client;
 
 import com.murphy.mall.security.api.UserApi;
 import com.murphy.mall.security.po.Role;
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 /**
- * 客户端 - 通过Feign调用RBAC真实微服务
+ * 服务降级
  *
  * @author murphy
- * @since 2021/9/28 4:13 下午
+ * @since 2021/10/2 3:26 下午
  */
 @FeignClient(name = "security-service", fallback = UserClient.UserClientFallback.class)
 public interface UserClient extends UserApi {

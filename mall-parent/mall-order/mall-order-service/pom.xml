@@ -98,6 +98,17 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-oauth2</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.murphy</groupId>
+            <artifactId>mall-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.murphy</groupId>
+            <artifactId>mall-security-instance</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
 </project>

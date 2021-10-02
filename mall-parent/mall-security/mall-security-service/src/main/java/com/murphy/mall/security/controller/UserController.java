@@ -159,4 +159,14 @@ public class UserController extends BaseController<IUserService, User> {
         }
         domain.setRoleIds(ids);
     }
+
+    /**
+     * 增加积分
+     * @param point
+     * @param username
+     */
+    @GetMapping(value = "/add-point")
+    public void addPoint(@RequestParam("point") Long point, @RequestParam("username") String username) {
+        service.addPoint(point, username);
+    }
 }

@@ -5,6 +5,7 @@ import com.murphy.mall.security.po.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -32,4 +33,12 @@ public interface UserApi {
      */
     @GetMapping("/select-roles/{id}")
     public List<Role> selectRolesByUserId(@PathVariable("id") Long id);
+
+    /**
+     * 增加积分
+     * @param point
+     * @param username
+     */
+    @GetMapping(value = "/add-point")
+    public void addPoint(@RequestParam("point") Long point, @RequestParam("username") String username);
 }

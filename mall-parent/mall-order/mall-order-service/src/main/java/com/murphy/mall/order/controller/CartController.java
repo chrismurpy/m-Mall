@@ -15,10 +15,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 购物车 - 控制器层
- *
+ * 购物车实现
  * @author murphy
- * @since 2021/10/1 2:40 下午
  */
 @RestController
 @RequestMapping("/cart")
@@ -27,28 +25,30 @@ public class CartController {
 
     @Autowired
     private CartService cartService;
+
     @Autowired
     private TokenDecode tokenDecode;
 
     /**
      * 添加购物车
-     * @param id skuId
+     * @param id sku id
      * @param num 购买的数量
      * @return
      */
     @RequestMapping("/add")
     public ResponseEntity add(Long id, Integer num) throws IOException {
-        // 从Spring Security中获得当前用户
+        // 从spring security 中获得当前用户
 //        String username = "murphy";
         Map<String, String> userInfo = tokenDecode.getUserInfo();
         String username = userInfo.get("user_name");
+
         cartService.add(id, num, username);
-        return ResponseEntity.ok("添加成功！");
+        return ResponseEntity.ok("添加成功");
     }
 
     /**
      * 查询购物车数据
-     * @return 商品详情
+     * @return
      */
     @RequestMapping("/list")
     public ResponseEntity<List<OrderItem>> list() throws IOException {
@@ -57,6 +57,8 @@ public class CartController {
         String username = userInfo.get("user_name");
 
         List<OrderItem> list = cartService.list(username);
+
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
+
 }

@@ -3,9 +3,7 @@ package com.murphy.mall.item.api;
 import com.murphy.mall.item.po.Sku;
 import com.murphy.mall.item.po.Spu;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,4 +23,7 @@ public interface SkuApi {
     @ApiOperation(value = "加载", notes = "根据ID加载")
     @GetMapping("/edit/{id}")
     public Sku edit(@PathVariable Long id);
+
+    @PostMapping("/decr-count")
+    public void decrCount(@RequestParam("num") Integer num, @RequestParam("skuId") Long skuId);
 }

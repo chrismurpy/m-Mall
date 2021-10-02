@@ -34,4 +34,11 @@ public interface IUserService extends ICrudService<User> {
      */
     public User getUserByUserName(String userName);
 
+    /**
+     * 增加会员积分
+     * @param point
+     * @param username
+     */
+    public void addPoint(Long point, String username);
+
 }

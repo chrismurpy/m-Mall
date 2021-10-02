@@ -61,4 +61,15 @@ public class UserServiceImpl extends CrudServiceImpl<User> implements IUserServi
 		return getBaseMapper().selectOne(Wrappers.<User>query().eq("user_name_", userName));
 	}
 
+	/**
+	 * 增加会员积分
+	 *
+	 * @param point
+	 * @param username
+	 */
+	@Override
+	public void addPoint(Long point, String username) {
+		((UserDao) getBaseMapper()).addPoint(point, username);
+	}
+
 }
