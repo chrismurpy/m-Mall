@@ -43,6 +43,11 @@ public interface SkuClient extends SkuApi {
         public void decrCount(Integer num, Long skuId) {
             LOGGER.info("异常发生，进入fallback方法！- sku");
         }
+
+        @Override
+        public void rollbackCount(Integer num, Long skuId) {
+            LOGGER.info("异常发生，进入fallback方法！- sku");
+        }
     }
 
     @Component
@@ -68,6 +73,11 @@ public interface SkuClient extends SkuApi {
 
                 @Override
                 public void decrCount(Integer num, Long skuId) {
+                    logger.info("异常发生，进入fallback方法！- sku");
+                }
+
+                @Override
+                public void rollbackCount(Integer num, Long skuId) {
                     logger.info("异常发生，进入fallback方法！- sku");
                 }
             };

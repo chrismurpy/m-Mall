@@ -1,11 +1,11 @@
 package com.murphy.mall.item.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.murphy.mall.core.service.impl.CrudServiceImpl;
 import com.murphy.mall.item.po.Category;
 import com.murphy.mall.item.service.ICategoryService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

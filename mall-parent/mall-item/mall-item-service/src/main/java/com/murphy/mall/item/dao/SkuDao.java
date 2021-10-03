@@ -33,4 +33,13 @@ public interface SkuDao extends ICrudDao<Sku> {
      */
     @Update(value = "update sku_ set stock_ = stock_ - #{num} where id_ = #{skuId} and stock_ >= #{num}")
     public int decrCount(@Param("num") Integer num, @Param("skuId") Long skuId);
+
+    /**
+     * 回滚库存
+     * @param num
+     * @param skuId
+     * @return
+     */
+    @Update(value = "update sku_ set stock_ = stock_ + #{num} where id_ = #{skuId}")
+    public int rollbackCount(@Param("num") Integer num, @Param("skuId") Long skuId);
 }

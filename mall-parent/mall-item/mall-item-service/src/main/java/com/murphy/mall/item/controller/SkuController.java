@@ -34,7 +34,17 @@ public class SkuController extends BaseController<ISkuService, Sku> {
      * @param skuId
      */
     @PostMapping("/decr-count")
-    public void decrCount(@RequestParam("num") Integer num,@RequestParam("skuId") Long skuId) {
+    public void decrCount(@RequestParam("num") Integer num, @RequestParam("skuId") Long skuId) {
         service.decrCount(num, skuId);
+    }
+
+    /**
+     * 回滚库存
+     * @param num
+     * @param skuId
+     */
+    @PostMapping("/rollback-count")
+    public void rollbackCount(@RequestParam("num") Integer num, @RequestParam("skuId") Long skuId) {
+        service.rollbackCount(num, skuId);
     }
 }

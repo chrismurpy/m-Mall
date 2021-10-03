@@ -4,6 +4,9 @@ spring:
   redis:
     host: 192.168.2.180
     port: 6379
+  rabbitmq:
+    host: 192.168.2.180
+    port: 5672
 mybatis:
   mapper-locations: classpath*:mybatis/*/*.xml
   type-aliases-package: com.murphy.mall.*.po
@@ -23,3 +26,22 @@ security:
     resource:
       jwt:
         key-uri: http://localhost:9098/oauth/token_key # 如果使用JWT，可以获取公钥用于 token 的验签
+
+mq:
+  pay:
+    exchange:
+      order: exchange.pay.order
+    queue:
+      order: queue.pay.order
+    routing:
+      key: routing.pay.order
+  order:
+    exchange:
+      ttl: exchange.order.ttl
+      dlx: exchange.order.dlx
+    queue:
+      ttl: queue.order.ttl
+      dlx: queue.order.dlx
+    routing:
+      ttl: routing.order.ttl
+      dlx: routing.order.dlx

@@ -17,4 +17,11 @@ public interface ISkuService extends ICrudService<Sku> {
      * @param skuId
      */
     public void decrCount(Integer num, Long skuId);
+
+    /**
+     * 回滚库存
+     * @param num
+     * @param skuId
+     */
+    public void rollbackCount(Integer num, Long skuId);
 }

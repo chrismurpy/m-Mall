@@ -1,6 +1,7 @@
 package com.murphy.mall.order.service.impl;
 
 
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.murphy.mall.common.utils.IdWorker;
 import com.murphy.mall.core.service.impl.CrudServiceImpl;
 import com.murphy.mall.order.client.SkuClient;
@@ -9,9 +10,12 @@ import com.murphy.mall.order.dao.IOrderItemDao;
 import com.murphy.mall.order.po.Order;
 import com.murphy.mall.order.po.OrderItem;
 import com.murphy.mall.order.service.IOrderService;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -37,6 +41,12 @@ public class OrderServiceImpl extends CrudServiceImpl<Order> implements IOrderSe
 
     @Autowired
     private UserClient userClient;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+    @Autowired
+    private Environment environment;
 
     @Override
     public void add(Order order) {
@@ -89,5 +99,49 @@ public class OrderServiceImpl extends CrudServiceImpl<Order> implements IOrderSe
 
         // 5 删除redis中的购物车数据
         redisTemplate.delete("Cart_" + order.getUsername());
+
+        // 6 发送延迟30分钟消息，未支付则取消订单，回滚库存
+        rabbitTemplate.convertAndSend(environment.getProperty("mq.order.exchange.ttl"),
+                environment.getProperty("mq.order.routing.ttl"), order.getId().toString());
+    }
+
+    /**
+     * 修改订单 支付状态
+     *
+     * @param outTradeNo
+     * @param tradeNo
+     */
+    @Override
+    public void updatePayStatus(String outTradeNo, String tradeNo) {
+        Order order = getBaseMapper().selectById(Long.parseLong(outTradeNo));
+
+        order.setUpdateTime(new Date());
+        order.setPayTime(new Date());
+        order.setOrderStatus("1");
+        order.setPayStatus("1");
+        order.setTransactionId(tradeNo);
+
+        getBaseMapper().updateById(order);
+    }
+
+    /**
+     * 修改订单 - 关闭订单 + 回滚库存
+     *
+     * @param outTradeNo
+     */
+    @Override
+    @Transactional(rollbackFor = {Exception.class})
+    public void closePayStatus(String outTradeNo) {
+        Order order = getBaseMapper().selectById(Long.parseLong(outTradeNo));
+
+        // 关闭订单 + 支付失败
+        order.setUpdateTime(new Date());
+        order.setOrderStatus("3");
+        order.setPayStatus("2");
+        // 回滚库存
+        OrderItem orderItem = orderItemDao.selectOne(Wrappers.<OrderItem>query().eq("order_id_", order.getId()));
+        skuClient.rollbackCount(orderItem.getNum(), orderItem.getSkuId());
+
+        getBaseMapper().updateById(order);
     }
 }

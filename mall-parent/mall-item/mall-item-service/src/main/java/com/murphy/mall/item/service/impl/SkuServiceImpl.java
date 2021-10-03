@@ -43,4 +43,15 @@ public class SkuServiceImpl extends CrudServiceImpl<Sku> implements ISkuService 
     public void decrCount(Integer num, Long skuId) {
         ((SkuDao) getBaseMapper()).decrCount(num, skuId);
     }
+
+    /**
+     * 回滚库存
+     *
+     * @param num
+     * @param skuId
+     */
+    @Override
+    public void rollbackCount(Integer num, Long skuId) {
+        ((SkuDao) getBaseMapper()).rollbackCount(num, skuId);
+    }
 }

@@ -15,4 +15,16 @@ public interface IOrderService extends ICrudService<Order> {
      */
     public void add(Order order);
 
+    /**
+     * 修改订单 支付状态
+     * @param outTradeNo
+     * @param tradeNo
+     */
+    public void updatePayStatus(String outTradeNo, String tradeNo);
+
+    /**
+     * 取消订单
+     * @param outTradeNo
+     */
+    public void closePayStatus(String outTradeNo);
 }

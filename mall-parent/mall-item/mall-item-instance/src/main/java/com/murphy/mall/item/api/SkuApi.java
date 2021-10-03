@@ -24,6 +24,16 @@ public interface SkuApi {
     @GetMapping("/edit/{id}")
     public Sku edit(@PathVariable Long id);
 
+    @ApiOperation(value = "减库存", notes = "根据订单 - 减库存")
     @PostMapping("/decr-count")
     public void decrCount(@RequestParam("num") Integer num, @RequestParam("skuId") Long skuId);
+
+    /**
+     * 回滚库存
+     * @param num
+     * @param skuId
+     */
+    @ApiOperation(value = "回滚库存", notes = "根据订单 - 回滚库存")
+    @PostMapping("/rollback-count")
+    public void rollbackCount(@RequestParam("num") Integer num, @RequestParam("skuId") Long skuId);
 }
