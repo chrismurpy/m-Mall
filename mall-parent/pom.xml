@@ -23,6 +23,7 @@
         <module>auth-center</module>
         <module>mall-order</module>
         <module>mall-pay</module>
+        <module>mall-seckill</module>
     </modules>
     <packaging>pom</packaging>
 
