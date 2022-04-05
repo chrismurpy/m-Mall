@@ -2,6 +2,7 @@ package com.murphy.mall.order.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.murphy.mall.order.client.SkuClient;
 import com.murphy.mall.order.dao.IOrderDao;
 import com.murphy.mall.order.dao.IOrderItemDao;
 import com.murphy.mall.order.po.Order;
@@ -22,16 +23,19 @@ public class OrderServiceImplTest {
     private IOrderDao orderDao;
     @Autowired
     private IOrderItemDao orderItemDao;
+    @Autowired
+    private SkuClient skuClient;
 
     @Test
     public void closePayStatus() {
-        Order order = orderDao.selectById(1444513139172446208L);
+        Order order = orderDao.selectById(1444562794744778752L);
         System.out.println(order);
 //        QueryWrapper<OrderItem> queryWrapper = Wrappers.<OrderItem>query().eq("order_id_",1444513139172446208L);
 //        OrderItem orderItem = orderItemDao.selectOne(queryWrapper);
 //        System.out.println(orderItem);
 
-        OrderItem orderItem = orderItemDao.selectOne(Wrappers.<OrderItem>query().eq("order_id_", 1444513139172446208L));
+        OrderItem orderItem = orderItemDao.selectOne(Wrappers.<OrderItem>query().eq("order_id_", order.getId()));
         System.out.println(orderItem);
+        skuClient.rollbackCount(orderItem.getNum(), orderItem.getSkuId());
     }
 }

@@ -6,6 +6,7 @@ import com.murphy.mall.common.utils.IdWorker;
 import com.murphy.mall.core.service.impl.CrudServiceImpl;
 import com.murphy.mall.order.client.SkuClient;
 import com.murphy.mall.order.client.UserClient;
+import com.murphy.mall.order.config.TokenDecode;
 import com.murphy.mall.order.dao.IOrderItemDao;
 import com.murphy.mall.order.po.Order;
 import com.murphy.mall.order.po.OrderItem;
@@ -17,6 +18,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -47,6 +49,9 @@ public class OrderServiceImpl extends CrudServiceImpl<Order> implements IOrderSe
 
     @Autowired
     private Environment environment;
+
+    @Autowired
+    private TokenDecode tokenDecode;
 
     @Override
     public void add(Order order) {
@@ -133,7 +138,13 @@ public class OrderServiceImpl extends CrudServiceImpl<Order> implements IOrderSe
     @Transactional(rollbackFor = {Exception.class})
     public void closePayStatus(String outTradeNo) {
         Order order = getBaseMapper().selectById(Long.parseLong(outTradeNo));
-
+//        String username = null;
+//        try {
+//             username = tokenDecode.getUserInfo().get("user_name");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        order.setUsername(username);
         // 关闭订单 + 支付失败
         order.setUpdateTime(new Date());
         order.setOrderStatus("3");

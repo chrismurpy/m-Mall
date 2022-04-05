@@ -1,8 +1,8 @@
 package com.murphy.mall.order.listener;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.murphy.mall.order.client.SkuClient;
+import com.murphy.mall.order.config.TokenDecode;
 import com.murphy.mall.order.dao.IOrderItemDao;
 import com.murphy.mall.order.po.Order;
 import com.murphy.mall.order.po.OrderItem;
@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * MQ - 监听延迟队列 - 订单30分钟未支付
@@ -32,6 +31,8 @@ public class OrderLazyListener {
     private IOrderItemDao orderItemDao;
     @Autowired
     private SkuClient skuClient;
+    @Autowired
+    private TokenDecode tokenDecode;
 
     @RabbitHandler
     public void handlerData(String msg) {
@@ -41,9 +42,10 @@ public class OrderLazyListener {
             order.setOrderStatus("3");
             orderService.updateById(order);
 
+            //TODO 回滚
             // 回滚库存
-//            OrderItem orderItem = orderItemDao.selectOne(Wrappers.<OrderItem>query().eq("order_id_", order.getId()));
-//            skuClient.rollbackCount(orderItem.getNum(), orderItem.getSkuId());
+            OrderItem orderItem = orderItemDao.selectOne(Wrappers.<OrderItem>query().eq("order_id_", order.getId()));
+            skuClient.rollbackCount(orderItem.getNum(), orderItem.getSkuId());
         }
     }
 }
