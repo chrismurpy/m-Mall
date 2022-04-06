@@ -1,5 +1,10 @@
 <style lang="less">
   @import './login.less';
+
+  body {
+    background-size: 100%;
+    background-image: url("../../assets/images/background.jpg");
+  }
 </style>
 
 <template>

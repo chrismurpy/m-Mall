@@ -10,6 +10,7 @@ import {
   getUnreadCount
 } from '@/api/user'
 import { setToken, getToken } from '@/libs/util'
+import { Modal } from 'iview'
 
 export default {
   state: {
@@ -92,17 +93,26 @@ export default {
     // 退出登录
     handleLogOut ({ state, commit }) {
       return new Promise((resolve, reject) => {
-        logout(state.token).then(() => {
-          commit('setToken', '')
-          commit('setAccess', [])
-          resolve()
-        }).catch(err => {
-          reject(err)
-        })
+        // logout(state.token).then(() => {
+        //   commit('setToken', '')
+        //   commit('setAccess', [])
+        //   resolve()
+        // }).catch(err => {
+        //   reject(err)
+        // })
+
         // 如果你的退出登录无需请求接口，则可以直接使用下面三行代码而无需使用logout调用接口
-        // commit('setToken', '')
-        // commit('setAccess', [])
-        // resolve()
+        Modal.confirm({
+          title: '真的要狠心离开嘛～ T.T',
+          onOk: () => {
+            commit('setToken', '')
+            commit('setAccess', [])
+            resolve(true)
+          },
+          onCancel: () => {
+            resolve(false)
+          }
+        })
       })
     },
     // 获取用户相关信息

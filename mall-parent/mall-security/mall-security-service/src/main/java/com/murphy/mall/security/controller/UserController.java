@@ -13,12 +13,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.*;
 import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.Resource;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
@@ -42,6 +42,9 @@ public class UserController extends BaseController<IUserService, User> {
      */
     @Autowired
     private OAuth2ProtectedResourceDetails auth2ProtectedResourceDetails;
+
+    @Autowired
+    private ConsumerTokenServices consumerTokenServices;
 
     /**
      * 封装并发送Http请求
@@ -83,6 +86,15 @@ public class UserController extends BaseController<IUserService, User> {
 
         // 发送请求
         return restTemplate.exchange(auth2ProtectedResourceDetails.getAccessTokenUri(), HttpMethod.POST, httpEntity, OAuth2AccessToken.class);
+    }
+
+    @ApiOperation("注销功能")
+    @GetMapping("/logout")
+    public ResponseEntity logout(String accessToken) {
+        if (consumerTokenServices.revokeToken(accessToken)) {
+            return ResponseEntity.ok("注销成功");
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @ApiOperation("通过登录获得用户")
