@@ -15,13 +15,14 @@ import java.util.List;
 @Service
 public class DeptServiceImpl extends CrudServiceImpl<Dept> implements IDeptService {
 
+    @Override
     public List<Dept> list(Dept entity) {
         QueryWrapper<Dept> queryWrapper = Wrappers.<Dept>query();
         if (null != entity.getAddress() && !"".equals(entity.getAddress().trim())) {
-            queryWrapper.like("address", entity.getAddress());
+            queryWrapper.like("address_", entity.getAddress());
         }
         if (null != entity.getTitle() && !"".equals(entity.getTitle().trim())) {
-            queryWrapper.like("title", entity.getTitle());
+            queryWrapper.like("title_", entity.getTitle());
         }
         return baseMapper.selectList(queryWrapper);
     }
