@@ -39,7 +39,7 @@ spring:
         multiplier: 2 #每次重试失败后，重试间隔所增加的倍数
         max-attempts: 10 #最多重试 6 次
   datasource:
-    url: jdbc:mysql://212.129.249.243:3306/mall?characterEncoding=utf8&characterSetResults=utf8&autoReconnect=true&failOverReadOnly=false
+    url: jdbc:mysql://192.168.2.180:3306/m-Mall?characterEncoding=utf8&characterSetResults=utf8&autoReconnect=true&failOverReadOnly=false
     username: root
     password: xmf123456
     driver-class-name: com.mysql.jdbc.Driver

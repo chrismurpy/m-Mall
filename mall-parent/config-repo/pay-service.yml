@@ -10,7 +10,7 @@ logging:
 
 spring:
   rabbitmq:
-    host: 212.129.249.243
+    host: 192.168.2.180
     port: 5672
 
 mq:

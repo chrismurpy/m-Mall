@@ -11,7 +11,7 @@ logging:
 
 spring:
   redis:
-    host: 212.129.249.243
+    host: 192.168.2.180
     port: 6379
 
 #canal配置
@@ -20,5 +20,5 @@ canal:
     instances:
       # exmaple
       example:
-        host: 212.129.249.243
+        host: 192.168.2.180
         port: 11111
