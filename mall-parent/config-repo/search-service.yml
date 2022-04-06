@@ -13,9 +13,9 @@ spring:
   data:
     elasticsearch:
       cluster-name: elasticsearch
-      cluster-nodes: 192.168.2.180:9300
+      cluster-nodes: 212.129.249.243:9300
   elasticsearch:
     rest:
-      uris: 192.168.2.180:9200
+      uris: 212.129.249.243:9200
   jackson:
     default-property-inclusion: non_null # 配置JSON处理时忽略空值

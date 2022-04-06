@@ -15,7 +15,7 @@ hystrix:
             timeoutInMillisecond: 60000 # 熔断超时时长：6000 ms
 spring:
   redis:
-    host: 192.168.2.180
+    host: 212.129.249.243
     port: 6379
   cloud:
     gateway:
