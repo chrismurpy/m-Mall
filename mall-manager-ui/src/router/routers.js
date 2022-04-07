@@ -195,7 +195,7 @@ export default [
     path: '/item',
     name: 'item',
     meta: {
-      title: '商品管理',
+      title: '药品管理',
       icon: 'md-menu'
     },
     component: Main,
@@ -251,7 +251,7 @@ export default [
         path: 'spu',
         name: 'list_item_spu',
         meta: {
-          title: '商品管理',
+          title: '药品管理',
           icon: 'md-funnel'
         },
         component: () => import('@/view/item/spu/list')
@@ -260,7 +260,7 @@ export default [
         path: 'spu/edit',
         name: 'edit_item_spu',
         meta: {
-          title: '商品修改',
+          title: '药品修改',
           hideInMenu: true,
           icon: 'md-funnel'
         },

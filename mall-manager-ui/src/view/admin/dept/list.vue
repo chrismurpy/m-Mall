@@ -15,7 +15,7 @@
                     </Col>
                     <Col span="8">
                         <Divider type="vertical" />
-                        <Button type="primary" @click="addRoot">添加</Button>
+<!--                        <Button type="primary" @click="addRoot">添加</Button>-->
                         <Button type="primary" @click="query" style="margin-left: 8px">查询</Button>
                     </Col>
                 </Row>
