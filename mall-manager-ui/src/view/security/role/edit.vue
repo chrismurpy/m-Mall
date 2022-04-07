@@ -23,9 +23,9 @@
             </FormItem>
             </Col>
             <Col span="12">
-            <FormItem label="权限" prop="permissionIds">
-                <select-permissions v-model="formData.permissionIds"></select-permissions>
-            </FormItem>
+<!--            <FormItem label="权限" prop="permissionIds">-->
+<!--                <select-permissions v-model="formData.permissionIds"></select-permissions>-->
+<!--            </FormItem>-->
             </Col>
         </Row>
         <FormItem label="备注" prop="desc">

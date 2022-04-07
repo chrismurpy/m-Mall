@@ -42,8 +42,8 @@
                     :selection-type="props.selectionType">
                 <!-- 原文中 scope="scope" 会警告， 2.5版本后应为slot-scope="scope"-->
                 <template slot="action" slot-scope="scope">
-                    <Button type="primary" size="small" @click="addChild(scope.row.id)">添加</Button>
-                    <Button type="primary" size="small" @click="edit(scope.row.id)">修改</Button>
+                    <Button type="primary" size="small" @click="addChild(scope.row.id)">添加</Button>&nbsp;
+                    <Button type="primary" size="small" @click="edit(scope.row.id)">修改</Button>&nbsp;
                     <Button type="primary" size="small" @click="remove(scope.row.id)">删除</Button>
                 </template>
             </zk-table>

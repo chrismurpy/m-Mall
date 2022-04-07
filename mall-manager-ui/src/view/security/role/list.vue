@@ -15,8 +15,8 @@
                     </Col>
                     <Col span="8">
                         <Divider type="vertical" />
-                        <Button type="primary" @click="add">添加</Button>
-                        <Button type="primary" @click="removeBatch">删除</Button>
+                        <Button type="primary" @click="add">添加</Button>&nbsp;
+                        <Button type="primary" @click="removeBatch">删除</Button>&nbsp;
                         <Button type="primary" @click="query">查询</Button>
                     </Col>
                 </Row>
