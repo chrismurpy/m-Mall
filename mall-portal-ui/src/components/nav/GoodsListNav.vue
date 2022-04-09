@@ -3,16 +3,16 @@
     <div class="search-nav">
       <div class="search-nav-container">
         <ul>
-          <li>全部商品分类</li>
+          <li>全部分类</li>
           <li><router-link to="/">首页</router-link></li>
-          <li><router-link to="/">服装城</router-link></li>
-          <li><router-link to="/">美妆馆</router-link></li>
-          <li><router-link to="/">BIT超市</router-link></li>
-          <li><router-link to="/">生鲜</router-link></li>
-          <li><router-link to="/">全球购</router-link></li>
-          <li><router-link to="/">闪购</router-link></li>
-          <li><router-link to="/">拍卖</router-link></li>
-          <li><router-link to="/">金融</router-link></li>
+          <li><router-link to="/">中西药品</router-link></li>
+          <li><router-link to="/">家庭常备药</router-link></li>
+          <li><router-link to="/">医疗器械</router-link></li>
+          <li><router-link to="/">美妆个护</router-link></li>
+          <li><router-link to="/">维生素钙</router-link></li>
+          <li><router-link to="/">健康电器</router-link></li>
+          <li><router-link to="/">健康理疗</router-link></li>
+          <li><router-link to="/">体检门诊</router-link></li>
         </ul>
       </div>
     </div>
@@ -29,7 +29,7 @@ export default {
 .search-nav{
   width: 100%;
   height: 64px;
-  border-bottom: 2px solid #B1191A;
+  border-bottom: 2px solid #ff9d9e;
 }
 .search-nav-container{
   width: 80%;
@@ -55,12 +55,12 @@ export default {
   float: left;
 }
 .search-nav-container a{
-  color: #C81623;
+  color: #ff6b75;
   text-decoration: none;
 }
 .search-nav-container li:first-child{
   padding: 0px 38px;
-  background:#B1191A;
+  background: #ea6c6c;
   margin: 0px;
   color: #fff;
 }

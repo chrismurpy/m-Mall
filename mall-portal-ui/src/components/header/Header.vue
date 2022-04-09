@@ -5,7 +5,7 @@
         <li>
           <Dropdown  placement="bottom-start">
             <a href="javascript:void(0)">
-              <Icon type="ios-location" class="icon"></Icon> {{city}}
+              <Icon type="ios-location" class="icon"></Icon>{{city}}
             </a>
             <DropdownMenu slot="list">
               <div class="city">
@@ -19,22 +19,22 @@
       </ul>
       <ul class="detail">
         <li class="first" v-show="!userInfo.username">
-          你好，请<router-link to="/login">登录 <Icon type="person"></Icon></router-link> |<span class="text-color-red"><router-link to="/SignUp">免费注册 <Icon type="person-add"></Icon></router-link></span>
+          你好，请先<router-link to="/login"> 登录 <Icon type="person"></Icon></router-link> |<span class="text-color-red"><router-link to="/SignUp">免费注册 <Icon type="person-add"></Icon></router-link></span>
         </li>
         <li v-show="!!userInfo.username">
           <Dropdown>
             <p class="username-p">
-              <Avatar class="person-icon" icon="person" size="small" /> <span class="username">{{userInfo.username}} </span>
+              <Avatar class="person-icon" icon="person" size="small" /> <span class="username"> {{userInfo.username}} </span>
             </p>
             <DropdownMenu slot="list">
                 <div class="my-page">
                   <div class="my-info" @click="myInfo">
-                    <Icon type="home"></Icon>
-                    <p>我的主页</p>
+<!--                    <Icon type="home"></Icon>-->
+                    <p>主页</p>
                   </div>
                   <div class="sign-out" @click="signOutFun">
-                    <Icon type="log-out"></Icon>
-                    <p>退出登录</p>
+<!--                    <Icon type="log-out"></Icon>-->
+                    <p>注销</p>
                   </div>
                 </div>
             </DropdownMenu>
@@ -48,7 +48,7 @@
             <DropdownMenu slot="list">
               <div class="shopping-cart-null" v-show="shoppingCart.length <= 0">
                 <Icon type="ios-cart-outline" class="cart-null-icon"></Icon>
-                <span>你的购物车没有空空哦</span>
+                <span>您的购物车空空如也哦~</span>
                 <span>赶快去添加商品吧~</span>
               </div>
               <div class="shopping-cart-list" v-show="shoppingCart.length > 0">
@@ -70,7 +70,7 @@
                         <span class="shopping-cart-text">
                           {{item.count}}
                         </span>
-                        价钱:
+                        价格:
                         <span class="shopping-cart-text">
                           {{item.price}}
                         </span>
@@ -80,14 +80,13 @@
                 </div>
                 <div class="go-to-buy">
                   <Button type="error" size="small" @click="goToPay">
-                    去结账
+                    去下单
                   </Button>
                 </div>
               </div>
             </DropdownMenu>
           </Dropdown>
         </li>
-        <li><router-link to="/">网站导航</router-link></li>
         <li><router-link to="/freeback">意见反馈</router-link></li>
         <li><router-link to="/">商城首页</router-link></li>
       </ul>
@@ -105,12 +104,12 @@ export default {
   },
   data () {
     return {
-      city: '珠海',
+      city: '浙江',
       cityArr: [
-        ['北京', '上海', '天津', '重庆', '广州'],
-        ['深圳', '河南', '辽宁', '吉林', '江苏'],
+        ['北京', '上海', '天津', '重庆', '广东'],
+        ['湖南', '河南', '辽宁', '吉林', '江苏'],
         ['江西', '四川', '海南', '贵州', '云南'],
-        ['西藏', '陕西', '甘肃', '青海', '珠海']
+        ['西藏', '陕西', '甘肃', '青海', '浙江']
       ]
     };
   },
@@ -232,7 +231,7 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   align-content: space-between;
-  width: 200px;
+  width: 250px;
   overflow: hidden;
   font-size: 12px;
   line-height: 20px;

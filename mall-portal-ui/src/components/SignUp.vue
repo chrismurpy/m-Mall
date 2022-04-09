@@ -8,7 +8,7 @@
         <div class="sign-up-title">
           <h1>欢迎注册账号</h1>
           <br>
-          <h2>BIT MALL, 天天低价品质保证, 让消费者钱更值钱</h2>
+          <h2>Medicine-MALL 点滴之行，呵护生活</h2>
         </div>
         <div class="sing-up-step-box">
           <Steps :current="signUpStep">
@@ -74,10 +74,10 @@ export default {
 }
 .sing-up-step-box {
   margin: 15px auto;
-  padding-left: 30px;
+  padding-left: 15px;
   padding-top: 30px;
-  width: 430px;
-  height: 380px;
+  width: 500px;
+  height: 350px;
   border: 1px solid #495060;
 }
 .sign-up-box {

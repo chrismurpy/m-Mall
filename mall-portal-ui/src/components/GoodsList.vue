@@ -147,8 +147,8 @@ export default {
       icon: [ 'arrow-up-a', 'arrow-down-a', 'arrow-down-a' ],
       goodsTool: [
         {title: '综合', en: 'sale'},
-        {title: '评论数', en: 'remarks'},
-        {title: '价格', en: 'price'}
+        // {title: '评论数', en: 'remarks'},
+        // {title: '价格', en: 'price'}
       ],
       goodsList: [],
       filters:[],

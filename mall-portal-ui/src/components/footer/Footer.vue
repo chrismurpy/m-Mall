@@ -5,19 +5,19 @@
       <div class="icon-row">
         <div class="footer-icon">
           <h5 class="footer-icon-child"></h5>
-          <span class="footer-icon-text">品类齐全，轻松购物</span>
+          <span class="footer-icon-text">轻松购物, 乐享生活</span>
         </div>
         <div class="footer-icon">
           <h5 class="footer-icon-child footer-icon-child-2"></h5>
-          <span class="footer-icon-text">多仓直发，极速配送</span>
+          <span class="footer-icon-text">极速配送, 医准达</span>
         </div>
         <div class="footer-icon">
           <h5 class="footer-icon-child footer-icon-child-3"></h5>
-          <span class="footer-icon-text">正品行货，精致服务</span>
+          <span class="footer-icon-text">精致服务, 在线门诊</span>
         </div>
         <div class="footer-icon">
           <h5 class="footer-icon-child footer-icon-child-4"></h5>
-          <span class="footer-icon-text">天天低价，畅选无忧</span>
+          <span class="footer-icon-text">天天咨询, 健康生活</span>
         </div>
       </div>
       <div class="service-intro">
@@ -40,7 +40,7 @@
         </div>
         <div class="clearfix"></div>
         <div class="copyright">
-          <p>Copyright © 2021 by murphy <span>本项目仅供学习参考</span></p>
+          <p>Copyright © 2022 by murphy <span>本项目仅供学习参考</span></p>
         </div>
       </div>
     </footer>
@@ -54,13 +54,13 @@ export default {
     return {
       linkItemClass: 'link-item',
       guideArr: [
-        [ '购物指南', '购物流程', '会员介绍', '生活旅行', '常见问题', '大家电', '联系客服' ],
-        [ '配送方式', '上门自提', '211限时达', '配送服务查询', '收取标准', '海外配送' ],
-        [ '支付方式', '货到付款', '在线支付', '分期付款', '邮局汇款', '公司转账' ],
-        [ '售后服务', '售后政策', '价格保护', '退款说明', '返修/退换货', '取消订单' ]
+        [ '购物指南', '购物流程', '医疗门诊', '常见问题', '联系客服'],
+        [ '配送方式', '上门自提', '医准达', '门诊自提'],
+        [ '支付方式', '货到付款', '门诊自取'],
+        [ '售后服务', '退款说明', '取消订单' ]
       ],
       moreLink: [
-        '关于我们', '联系我们', '联系客服', '合作招商', '商家帮助', '营销中心', '销售联盟', '校园社区', '风险监测', '隐私政策'
+        '关于我们', '联系我们', '合作招商', '商家帮助', '营销中心', '隐私政策', '医药互通'
       ]
     };
   }

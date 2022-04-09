@@ -29,7 +29,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         http.csrf().disable()
                 .authorizeRequests()
                 // 所有用户微服务未认证可以访问
-//                .antMatchers("/user/**", "/security/user/**").permitAll()
+//                .antMatchers("/user/**", "/security/user/**").permitAll();
                 // 需要登录认证
                 .antMatchers("/user/login", "/security/user/login").permitAll()
                 // 用于测试

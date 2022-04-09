@@ -29,9 +29,9 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         http.csrf().disable()
                 .authorizeRequests()
                 // 未认证也可以访问
-//                .antMatchers("/**").permitAll();
+                .antMatchers("/**").permitAll();
                 // 认证后可以访问
-                .antMatchers("/**").authenticated();
+//                .antMatchers("/**").authenticated();
     }
 
     @Override
