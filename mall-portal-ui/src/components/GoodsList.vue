@@ -108,7 +108,7 @@
                 <span>{{item.selected.title}}</span>
               </div>
               <div class="goods-show-num">
-                已有<span>10</span>人评价
+                已有<span>20</span>人评价
               </div>
               <div class="goods-show-seller">
                 <span>自营</span>

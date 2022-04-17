@@ -65,7 +65,7 @@
                         align: 'center'
                     },
                     {
-                        title: '线路名称',
+                        title: '详情介绍',
                         key: 'rname',
                         width: 500
                     },

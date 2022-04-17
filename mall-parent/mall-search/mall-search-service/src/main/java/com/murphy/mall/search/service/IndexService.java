@@ -94,7 +94,7 @@ public class IndexService {
                 // 通用参数
                 value = genericMap.get(name);
 
-                if (param.getNumeric()) {
+                if (param.getNumeric() != null) {
                     // 数值类型需要加分段
                     value = this.chooseSegment(value.toString(), param);
                 }

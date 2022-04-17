@@ -271,7 +271,7 @@ export default [
 
   // TODO 此处为旅游网线路管理模块，暂时显示为订单
   {
-    path: '/route',
+    path: '/item',
     name: 'route',
     meta: {
       title: '线路',
@@ -300,7 +300,7 @@ export default [
       },
       {
         path: 'seller',
-        name: 'list_route_seller',
+        name: 'list_item_seller',
         meta: {
           title: '商家管理',
           icon: 'md-funnel'
@@ -309,7 +309,7 @@ export default [
       },
       {
         path: 'seller/edit',
-        name: 'edit_route_seller',
+        name: 'edit_item_seller',
         meta: {
           title: '商家修改',
           hideInMenu: true,

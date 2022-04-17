@@ -49,7 +49,7 @@
             </Col>
         </Row>
 
-        <FormItem label="线路介绍" prop="routeIntroduce">
+        <FormItem label="详情介绍" prop="routeIntroduce">
             <Input type="textarea" :rows="10" v-model="formData.routeIntroduce"></Input>
         </FormItem>
 
